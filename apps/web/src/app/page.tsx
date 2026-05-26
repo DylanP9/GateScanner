@@ -7,11 +7,35 @@ import AirportSearchCard from "@/components/AirportSearchCard";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import ReportQueuePanel from "@/components/ReportQueuePanel";
-import { airportReports, matchesAirportSearch } from "@/data/airportReports";
+import {
+  airportReports,
+  matchesAirportSearch,
+  type QueueSubmission,
+  type QueueType,
+} from "@/data/airportReports";
+
+type ReportFormErrors = {
+  airport?: string;
+  terminal?: string;
+  queueType?: string;
+  waitMinutes?: string;
+};
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [terminalFilter, setTerminalFilter] = useState("");
+
+  const [reportAirport, setReportAirport] = useState("");
+  const [reportTerminal, setReportTerminal] = useState("");
+  const [reportQueueType, setReportQueueType] =
+    useState<QueueType>("Security");
+  const [reportWaitMinutes, setReportWaitMinutes] = useState("");
+  const [reportNote, setReportNote] = useState("");
+  const [reportErrors, setReportErrors] = useState<ReportFormErrors>({});
+  const [successMessage, setSuccessMessage] = useState("");
+  const [recentSubmissions, setRecentSubmissions] = useState<
+    QueueSubmission[]
+  >([]);
 
   const filteredReports = useMemo(() => {
     const normalisedTerminalFilter = terminalFilter.trim().toLowerCase();
@@ -26,6 +50,74 @@ export default function Home() {
       return matchesSearch && matchesTerminal;
     });
   }, [searchTerm, terminalFilter]);
+
+  function validateReportForm() {
+    const errors: ReportFormErrors = {};
+    const trimmedAirport = reportAirport.trim();
+    const trimmedTerminal = reportTerminal.trim();
+    const parsedWaitMinutes = Number(reportWaitMinutes);
+
+    if (trimmedAirport.length === 0) {
+      errors.airport = "Airport is required.";
+    }
+
+    if (trimmedTerminal.length === 0) {
+      errors.terminal = "Terminal is required.";
+    }
+
+    if (reportQueueType.length === 0) {
+      errors.queueType = "Queue type is required.";
+    }
+
+    if (reportWaitMinutes.trim().length === 0) {
+      errors.waitMinutes = "Wait time is required.";
+    } else if (!Number.isFinite(parsedWaitMinutes)) {
+      errors.waitMinutes = "Wait time must be a number.";
+    } else if (parsedWaitMinutes <= 0) {
+      errors.waitMinutes = "Wait time must be greater than 0.";
+    } else if (parsedWaitMinutes > 240) {
+      errors.waitMinutes = "Wait time must be 240 minutes or less.";
+    }
+
+    return errors;
+  }
+
+  function resetReportForm() {
+    setReportAirport("");
+    setReportTerminal("");
+    setReportQueueType("Security");
+    setReportWaitMinutes("");
+    setReportNote("");
+  }
+
+  function handleReportSubmit() {
+    const errors = validateReportForm();
+
+    setReportErrors(errors);
+    setSuccessMessage("");
+
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
+    const newSubmission: QueueSubmission = {
+      id: Date.now(),
+      airport: reportAirport.trim(),
+      terminal: reportTerminal.trim(),
+      queueType: reportQueueType,
+      waitMinutes: Number(reportWaitMinutes),
+      note: reportNote.trim(),
+      submittedAt: "just now",
+    };
+
+    setRecentSubmissions((currentSubmissions) => [
+      newSubmission,
+      ...currentSubmissions,
+    ]);
+
+    setSuccessMessage("Report submitted locally. Supabase storage comes next.");
+    resetReportForm();
+  }
 
   return (
     <main className="min-h-screen bg-[#05203c] text-slate-950">
@@ -83,7 +175,22 @@ export default function Home() {
             )}
           </div>
 
-          <ReportQueuePanel />
+          <ReportQueuePanel
+            airport={reportAirport}
+            terminal={reportTerminal}
+            queueType={reportQueueType}
+            waitMinutes={reportWaitMinutes}
+            note={reportNote}
+            errors={reportErrors}
+            successMessage={successMessage}
+            recentSubmissions={recentSubmissions}
+            onAirportChange={setReportAirport}
+            onTerminalChange={setReportTerminal}
+            onQueueTypeChange={setReportQueueType}
+            onWaitMinutesChange={setReportWaitMinutes}
+            onNoteChange={setReportNote}
+            onSubmit={handleReportSubmit}
+          />
         </div>
       </section>
     </main>
