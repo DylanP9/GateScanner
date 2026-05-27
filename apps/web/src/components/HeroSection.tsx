@@ -1,7 +1,7 @@
 export default function HeroSection() {
     return (
-      <section className="relative mx-auto max-w-7xl overflow-hidden px-6 pb-6 pt-8 md:pb-8 md:pt-14">
-        <div className="pointer-events-none absolute right-[-90px] top-10 hidden rotate-[-8deg] opacity-12 md:block">
+      <section className="relative mx-auto max-w-7xl overflow-hidden px-4 pb-5 pt-6 sm:px-6 md:pb-8 md:pt-14">
+        <div className="pointer-events-none absolute right-[-140px] top-10 hidden rotate-[-8deg] opacity-10 md:block lg:right-[-90px]">
           <svg
             width="540"
             height="315"
@@ -24,15 +24,15 @@ export default function HeroSection() {
         </div>
   
         <div className="relative max-w-4xl text-white">
-          <p className="mb-4 inline-flex rounded-full bg-sky-400/15 px-4 py-2 text-sm font-bold text-sky-100 ring-1 ring-sky-300/25">
-            Live security and passport-control times from real travellers
+          <p className="mb-4 inline-flex rounded-full bg-sky-400/15 px-4 py-2 text-xs font-bold text-sky-100 ring-1 ring-sky-300/25 sm:text-sm">
+            Live airport queue times from real travellers
           </p>
   
-          <h1 className="max-w-3xl text-5xl font-black leading-tight tracking-tight md:text-7xl">
+          <h1 className="max-w-3xl text-4xl font-black leading-tight tracking-tight sm:text-5xl md:text-7xl">
             Know the airport queue before you fly.
           </h1>
   
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-sky-50/85">
+          <p className="mt-5 max-w-2xl text-base leading-7 text-sky-50/85 sm:text-lg sm:leading-8">
             Search an airport once and see the combined departure queue picture
             across security and passport control, with arrivals and baggage
             information available when you need it.

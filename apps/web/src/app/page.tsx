@@ -144,7 +144,7 @@ export default function Home() {
 
       <section
         id="airport-search"
-        className="mx-auto max-w-7xl scroll-mt-24 px-6 pb-10"
+        className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-8 sm:px-6 md:pb-10"
       >
         <AirportSearchCard
           searchTerm={searchTerm}
@@ -159,11 +159,11 @@ export default function Home() {
 
       <section
         id="live-queues"
-        className="scroll-mt-24 bg-slate-50 px-6 py-12"
+        className="scroll-mt-24 bg-slate-50 px-4 py-10 sm:px-6 md:py-12"
       >
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <div className="mb-6 flex items-end justify-between gap-4">
+            <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="text-sm font-extrabold uppercase tracking-wide text-sky-600">
                   Live airport snapshot
@@ -176,14 +176,14 @@ export default function Home() {
 
               <a
                 href="#airport-search"
-                className="hidden rounded-xl bg-white px-4 py-3 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-200 hover:bg-slate-100 md:block"
+                className="w-fit rounded-xl bg-white px-4 py-3 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-200 hover:bg-slate-100"
               >
                 Search airports
               </a>
             </div>
 
             {filteredReports.length > 0 ? (
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 {filteredReports.map((report) => (
                   <AirportReportCard key={report.code} report={report} />
                 ))}
