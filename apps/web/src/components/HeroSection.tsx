@@ -1,10 +1,10 @@
 export default function HeroSection() {
     return (
-      <section className="relative mx-auto max-w-7xl overflow-hidden px-6 pb-10 pt-8 md:pb-16 md:pt-16">
-        <div className="pointer-events-none absolute right-[-120px] top-12 hidden rotate-[-8deg] opacity-20 md:block">
+      <section className="relative mx-auto max-w-7xl overflow-hidden px-6 pb-6 pt-8 md:pb-8 md:pt-14">
+        <div className="pointer-events-none absolute right-[-90px] top-10 hidden rotate-[-8deg] opacity-12 md:block">
           <svg
-            width="620"
-            height="360"
+            width="540"
+            height="315"
             viewBox="0 0 620 360"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
