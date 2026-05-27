@@ -81,6 +81,33 @@ Planned stack:
 - Expo / React Native for the future mobile app
 
 ---
+## Backend Decision
+
+GateScanner will use Supabase for the backend.
+
+Supabase is a good fit because GateScanner data is naturally relational:
+
+- Airports have terminals
+- Terminals have queue reports
+- Queue reports belong to specific airport processes such as security, passport control, baggage, and customs
+
+Supabase provides:
+
+- PostgreSQL database
+- Authentication options for future user accounts
+- Row Level Security for safer public submissions
+- Realtime features for future live queue updates
+- Simple integration with Next.js
+
+The first backend phase will focus on:
+
+- Creating the database schema
+- Adding airport seed data
+- Saving queue reports
+- Reading recent queue reports
+- Calculating queue estimates from real report data
+
+---
 
 ## Project Structure
 
