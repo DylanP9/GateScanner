@@ -19,7 +19,6 @@ export type AirportReport = {
   baggageMinutes: number;
   customsMinutes: number;
   status: AirportStatus;
-  status: "Clear" | "Busy" | "Heavy";
   statusClass: string;
   updated: string;
   reports: number;

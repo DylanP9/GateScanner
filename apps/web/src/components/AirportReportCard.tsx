@@ -18,9 +18,9 @@ export default function AirportReportCard({ report }: AirportReportCardProps) {
       <article>
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xl font-black">{report.code}</p>
-            <p className="text-sm font-semibold text-slate-500">
-              {report.airport} · {report.terminal}
+            <p className="text-2xl font-black text-slate-950">{report.code}</p>
+            <p className="mt-1 text-sm font-semibold text-slate-500">
+              {report.city} · {report.terminal}
             </p>
           </div>
 
@@ -31,26 +31,35 @@ export default function AirportReportCard({ report }: AirportReportCardProps) {
           </span>
         </div>
 
-        <div className="mt-6 space-y-3">
-          <div className="flex items-center justify-between rounded-2xl bg-slate-50 p-3">
-            <span className="text-sm font-bold text-slate-600">Security</span>
-            <span className="text-xl font-black">
-              {report.securityMinutes}m
-            </span>
-          </div>
+        <div className="mt-6 rounded-3xl bg-sky-50 p-5 ring-1 ring-sky-100">
+          <p className="text-xs font-black uppercase tracking-wide text-sky-700">
+            Combined departure queue
+          </p>
 
-          <div className="flex items-center justify-between rounded-2xl bg-slate-50 p-3">
-            <span className="text-sm font-bold text-slate-600">Passport</span>
-            <span className="text-xl font-black">
-              {report.passportMinutes}m
-            </span>
-          </div>
-
-          <div className="flex items-center justify-between rounded-2xl bg-sky-50 p-3 ring-1 ring-sky-100">
-            <span className="text-sm font-black text-sky-700">Combined</span>
-            <span className="text-xl font-black text-sky-700">
+          <div className="mt-2 flex items-end justify-between gap-3">
+            <p className="text-5xl font-black tracking-tight text-sky-700">
               {combinedMinutes}m
-            </span>
+            </p>
+
+            <p className="pb-2 text-xs font-bold text-sky-700">
+              Security + passport
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          <div className="rounded-2xl bg-slate-50 p-3">
+            <p className="text-xs font-bold text-slate-500">Security</p>
+            <p className="mt-1 text-xl font-black text-slate-950">
+              {report.securityMinutes}m
+            </p>
+          </div>
+
+          <div className="rounded-2xl bg-slate-50 p-3">
+            <p className="text-xs font-bold text-slate-500">Passport</p>
+            <p className="mt-1 text-xl font-black text-slate-950">
+              {report.passportMinutes}m
+            </p>
           </div>
         </div>
 

@@ -6,6 +6,7 @@ import AirportReportCard from "@/components/AirportReportCard";
 import AirportSearchCard from "@/components/AirportSearchCard";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import HowItWorks from "@/components/HowItWorks";
 import ReportQueuePanel from "@/components/ReportQueuePanel";
 import {
   airportReports,
@@ -145,7 +146,7 @@ export default function Home() {
                 </p>
 
                 <h2 className="mt-2 text-3xl font-black tracking-tight text-slate-950">
-                  Popular airport reports
+                  Current airport queue estimates
                 </h2>
               </div>
 
@@ -155,7 +156,7 @@ export default function Home() {
             </div>
 
             {filteredReports.length > 0 ? (
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {filteredReports.map((report) => (
                   <AirportReportCard key={report.code} report={report} />
                 ))}
@@ -193,6 +194,8 @@ export default function Home() {
           />
         </div>
       </section>
+
+      <HowItWorks />
     </main>
   );
 }
