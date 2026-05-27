@@ -40,12 +40,12 @@ export default function ReportQueuePanel({
   onSubmit,
 }: ReportQueuePanelProps) {
   return (
-    <aside className="rounded-3xl bg-[#05203c] p-6 text-white shadow-xl shadow-slate-300/50">
+    <aside className="rounded-3xl bg-[#05203c] p-4 text-white shadow-xl shadow-slate-300/50 sm:p-6">
       <p className="text-sm font-extrabold uppercase tracking-wide text-sky-300">
         Report your queue
       </p>
 
-      <h3 className="mt-3 text-3xl font-black leading-tight">
+      <h3 className="mt-3 text-2xl font-black leading-tight sm:text-3xl">
         Help travellers behind you.
       </h3>
 
@@ -138,7 +138,7 @@ export default function ReportQueuePanel({
           <textarea
             value={note}
             onChange={(event) => onNoteChange(event.target.value)}
-            className="mt-2 min-h-24 w-full resize-none rounded-2xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-950 outline-none ring-1 ring-slate-200 placeholder:text-slate-400 focus:ring-sky-400"
+            className="mt-2 min-h-20 w-full resize-none rounded-2xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-950 outline-none ring-1 ring-slate-200 placeholder:text-slate-400 focus:ring-sky-400"
             placeholder="Example: security moved quickly today"
           />
         </label>
@@ -159,20 +159,20 @@ export default function ReportQueuePanel({
       </div>
 
       <div className="mt-6 grid grid-cols-3 gap-3 text-center">
-        <div className="rounded-2xl bg-white/10 p-4">
-          <p className="text-2xl font-black">52</p>
+        <div className="rounded-2xl bg-white/10 p-3 sm:p-4">
+          <p className="text-xl font-black sm:text-2xl">52</p>
           <p className="text-xs font-bold text-sky-100/70">Airports</p>
         </div>
 
-        <div className="rounded-2xl bg-white/10 p-4">
-          <p className="text-2xl font-black">
+        <div className="rounded-2xl bg-white/10 p-3 sm:p-4">
+          <p className="text-xl font-black sm:text-2xl">
             {recentSubmissions.length}
           </p>
           <p className="text-xs font-bold text-sky-100/70">Your reports</p>
         </div>
 
-        <div className="rounded-2xl bg-white/10 p-4">
-          <p className="text-2xl font-black">3h</p>
+        <div className="rounded-2xl bg-white/10 p-3 sm:p-4">
+          <p className="text-xl font-black sm:text-2xl">3h</p>
           <p className="text-xs font-bold text-sky-100/70">Expiry</p>
         </div>
       </div>

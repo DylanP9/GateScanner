@@ -23,17 +23,17 @@ export default function AirportSearchCard({
     searchTerm.trim().length > 0 && suggestions.length > 0;
 
   return (
-    <div className="relative mt-6 rounded-3xl bg-white/95 p-4 shadow-2xl shadow-slate-950/30 backdrop-blur md:p-5">
-      <div className="mb-4 flex flex-wrap gap-2">
-        <button className="rounded-full bg-[#05203c] px-5 py-2 text-sm font-bold text-white">
+    <div className="relative mt-5 rounded-3xl bg-white/95 p-4 shadow-2xl shadow-slate-950/30 backdrop-blur sm:p-5">
+      <div className="mb-4 flex gap-2 overflow-x-auto pb-1">
+        <button className="shrink-0 rounded-full bg-[#05203c] px-5 py-2 text-sm font-bold text-white">
           Departure queues
         </button>
 
-        <button className="rounded-full px-5 py-2 text-sm font-bold text-slate-700 hover:bg-slate-100">
+        <button className="shrink-0 rounded-full px-5 py-2 text-sm font-bold text-slate-700 hover:bg-slate-100">
           Arrivals
         </button>
 
-        <button className="rounded-full px-5 py-2 text-sm font-bold text-slate-700 hover:bg-slate-100">
+        <button className="shrink-0 rounded-full px-5 py-2 text-sm font-bold text-slate-700 hover:bg-slate-100">
           Baggage & customs
         </button>
       </div>
@@ -48,13 +48,13 @@ export default function AirportSearchCard({
             <input
               value={searchTerm}
               onChange={(event) => onSearchTermChange(event.target.value)}
-              className="mt-1 w-full bg-transparent text-lg font-extrabold text-slate-950 outline-none placeholder:text-slate-400"
-              placeholder="Search Heathrow, LHR, Edinburgh..."
+              className="mt-1 w-full bg-transparent text-base font-extrabold text-slate-950 outline-none placeholder:text-slate-400 sm:text-lg"
+              placeholder="Search Heathrow, LHR..."
             />
           </label>
 
           {shouldShowSuggestions ? (
-            <div className="absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-slate-200">
+            <div className="absolute left-0 right-0 top-full z-20 mt-2 max-h-72 overflow-y-auto rounded-2xl bg-white shadow-2xl ring-1 ring-slate-200">
               {suggestions.map((airport) => (
                 <button
                   key={airport.code}
@@ -90,7 +90,7 @@ export default function AirportSearchCard({
           <input
             value={terminalFilter}
             onChange={(event) => onTerminalFilterChange(event.target.value)}
-            className="mt-1 w-full bg-transparent text-lg font-extrabold text-slate-950 outline-none placeholder:text-slate-400"
+            className="mt-1 w-full bg-transparent text-base font-extrabold text-slate-950 outline-none placeholder:text-slate-400 sm:text-lg"
             placeholder="Any terminal"
           />
         </label>
@@ -103,13 +103,13 @@ export default function AirportSearchCard({
         </button>
       </div>
 
-      <div className="mt-4 grid gap-3 rounded-2xl bg-sky-50 p-4 md:grid-cols-3">
+      <div className="mt-4 grid gap-3 rounded-2xl bg-sky-50 p-4 sm:grid-cols-3">
         <div>
           <p className="text-xs font-black uppercase tracking-wide text-sky-700">
-            Included in this search
+            Included
           </p>
           <p className="mt-1 text-sm font-bold text-slate-700">
-            Security + passport control
+            Security + passport
           </p>
         </div>
 
@@ -127,7 +127,7 @@ export default function AirportSearchCard({
             Result shown
           </p>
           <p className="mt-1 text-sm font-bold text-slate-700">
-            Total departure queue estimate
+            Departure estimate
           </p>
         </div>
       </div>
