@@ -142,7 +142,10 @@ export default function Home() {
 
       <HeroSection />
 
-      <section className="mx-auto max-w-7xl px-6 pb-10">
+      <section
+        id="airport-search"
+        className="mx-auto max-w-7xl scroll-mt-24 px-6 pb-10"
+      >
         <AirportSearchCard
           searchTerm={searchTerm}
           terminalFilter={terminalFilter}
@@ -154,7 +157,10 @@ export default function Home() {
         />
       </section>
 
-      <section className="bg-slate-50 px-6 py-12">
+      <section
+        id="live-queues"
+        className="scroll-mt-24 bg-slate-50 px-6 py-12"
+      >
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <div className="mb-6 flex items-end justify-between gap-4">
@@ -168,9 +174,12 @@ export default function Home() {
                 </h2>
               </div>
 
-              <button className="hidden rounded-xl bg-white px-4 py-3 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-200 hover:bg-slate-100 md:block">
-                View all airports
-              </button>
+              <a
+                href="#airport-search"
+                className="hidden rounded-xl bg-white px-4 py-3 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-200 hover:bg-slate-100 md:block"
+              >
+                Search airports
+              </a>
             </div>
 
             {filteredReports.length > 0 ? (
@@ -194,22 +203,24 @@ export default function Home() {
             )}
           </div>
 
-          <ReportQueuePanel
-            airport={reportAirport}
-            terminal={reportTerminal}
-            queueType={reportQueueType}
-            waitMinutes={reportWaitMinutes}
-            note={reportNote}
-            errors={reportErrors}
-            successMessage={successMessage}
-            recentSubmissions={recentSubmissions}
-            onAirportChange={setReportAirport}
-            onTerminalChange={setReportTerminal}
-            onQueueTypeChange={setReportQueueType}
-            onWaitMinutesChange={setReportWaitMinutes}
-            onNoteChange={setReportNote}
-            onSubmit={handleReportSubmit}
-          />
+          <div id="submit-report" className="scroll-mt-24">
+            <ReportQueuePanel
+              airport={reportAirport}
+              terminal={reportTerminal}
+              queueType={reportQueueType}
+              waitMinutes={reportWaitMinutes}
+              note={reportNote}
+              errors={reportErrors}
+              successMessage={successMessage}
+              recentSubmissions={recentSubmissions}
+              onAirportChange={setReportAirport}
+              onTerminalChange={setReportTerminal}
+              onQueueTypeChange={setReportQueueType}
+              onWaitMinutesChange={setReportWaitMinutes}
+              onNoteChange={setReportNote}
+              onSubmit={handleReportSubmit}
+            />
+          </div>
         </div>
       </section>
 
