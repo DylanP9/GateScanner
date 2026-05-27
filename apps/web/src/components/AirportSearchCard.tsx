@@ -1,20 +1,29 @@
+import type { AirportReport } from "@/data/airportReports";
+
 type AirportSearchCardProps = {
   searchTerm: string;
   terminalFilter: string;
   resultCount: number;
+  suggestions: AirportReport[];
   onSearchTermChange: (value: string) => void;
   onTerminalFilterChange: (value: string) => void;
+  onSuggestionSelect: (airportName: string) => void;
 };
 
 export default function AirportSearchCard({
   searchTerm,
   terminalFilter,
   resultCount,
+  suggestions,
   onSearchTermChange,
   onTerminalFilterChange,
+  onSuggestionSelect,
 }: AirportSearchCardProps) {
+  const shouldShowSuggestions =
+    searchTerm.trim().length > 0 && suggestions.length > 0;
+
   return (
-    <div className="relative mt-10 rounded-3xl bg-white/95 p-4 shadow-2xl shadow-slate-950/30 backdrop-blur md:p-5">
+    <div className="relative mt-6 rounded-3xl bg-white/95 p-4 shadow-2xl shadow-slate-950/30 backdrop-blur md:p-5">
       <div className="mb-4 flex flex-wrap gap-2">
         <button className="rounded-full bg-[#05203c] px-5 py-2 text-sm font-bold text-white">
           Departure queues
@@ -30,18 +39,48 @@ export default function AirportSearchCard({
       </div>
 
       <div className="grid gap-3 lg:grid-cols-[1.4fr_1fr_auto]">
-        <label className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
-          <span className="block text-xs font-bold uppercase tracking-wide text-slate-500">
-            Airport
-          </span>
+        <div className="relative">
+          <label className="block rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
+            <span className="block text-xs font-bold uppercase tracking-wide text-slate-500">
+              Airport
+            </span>
 
-          <input
-            value={searchTerm}
-            onChange={(event) => onSearchTermChange(event.target.value)}
-            className="mt-1 w-full bg-transparent text-lg font-extrabold text-slate-950 outline-none placeholder:text-slate-400"
-            placeholder="Search Heathrow, LHR, Edinburgh..."
-          />
-        </label>
+            <input
+              value={searchTerm}
+              onChange={(event) => onSearchTermChange(event.target.value)}
+              className="mt-1 w-full bg-transparent text-lg font-extrabold text-slate-950 outline-none placeholder:text-slate-400"
+              placeholder="Search Heathrow, LHR, Edinburgh..."
+            />
+          </label>
+
+          {shouldShowSuggestions ? (
+            <div className="absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-slate-200">
+              {suggestions.map((airport) => (
+                <button
+                  key={airport.code}
+                  type="button"
+                  onClick={() =>
+                    onSuggestionSelect(`${airport.airport} (${airport.code})`)
+                  }
+                  className="flex w-full items-center justify-between gap-4 px-4 py-3 text-left hover:bg-sky-50"
+                >
+                  <div>
+                    <p className="text-sm font-black text-slate-950">
+                      {airport.airport}
+                    </p>
+                    <p className="text-xs font-bold text-slate-500">
+                      {airport.city}, {airport.country} · {airport.terminal}
+                    </p>
+                  </div>
+
+                  <span className="rounded-full bg-sky-100 px-3 py-1 text-xs font-black text-sky-700">
+                    {airport.code}
+                  </span>
+                </button>
+              ))}
+            </div>
+          ) : null}
+        </div>
 
         <label className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
           <span className="block text-xs font-bold uppercase tracking-wide text-slate-500">

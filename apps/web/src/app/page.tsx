@@ -52,6 +52,22 @@ export default function Home() {
     });
   }, [searchTerm, terminalFilter]);
 
+  const airportSuggestions = useMemo(() => {
+    const normalisedSearch = searchTerm.trim().toLowerCase();
+
+    if (normalisedSearch.length === 0) {
+      return [];
+    }
+
+    return airportReports
+      .filter((report) => matchesAirportSearch(report, searchTerm))
+      .slice(0, 5);
+  }, [searchTerm]);
+
+  function handleSuggestionSelect(selectedAirport: string) {
+    setSearchTerm(selectedAirport);
+  }
+
   function validateReportForm() {
     const errors: ReportFormErrors = {};
     const trimmedAirport = reportAirport.trim();
@@ -131,8 +147,10 @@ export default function Home() {
           searchTerm={searchTerm}
           terminalFilter={terminalFilter}
           resultCount={filteredReports.length}
+          suggestions={airportSuggestions}
           onSearchTermChange={setSearchTerm}
           onTerminalFilterChange={setTerminalFilter}
+          onSuggestionSelect={handleSuggestionSelect}
         />
       </section>
 
